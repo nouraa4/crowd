@@ -9,13 +9,13 @@ from huggingface_hub import hf_hub_download
 # تحميل النموذج من Hugging Face
 with st.spinner("📥 جاري تحميل النموذج..."):
     model_path = hf_hub_download(
-        repo_id="noura-ai/models",
+        repo_id="noura-ai/cnn_congestion_model",  # اسم الريبو الصحيح على Hugging Face
         filename="cnn_congestion_model.h5",
         repo_type="model"
     )
     st.success("✅ تم تحميل النموذج!")
 
-# تحميل النموذج
+# تحميل نموذج CNN
 model = tf.keras.models.load_model(model_path)
 class_names = ['خفيف', 'متوسط', 'عالي']
 
