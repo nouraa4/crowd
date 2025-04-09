@@ -4,9 +4,22 @@ import tensorflow as tf
 from PIL import Image
 import folium
 from streamlit_folium import st_folium
+import os
+import requests
 
+# تحقق من وجود النموذج محليًا
+model_path = "cnn_congestion_model.h5"
+if not os.path.exists(model_path):
+    with st.spinner("📥 جاري تحميل النموذج..."):
+        url = "https://drive.google.com/file/d/1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_/view?usp=sharing"
+        r = requests.get(url, allow_redirects=True)
+        open(model_path, 'wb').write(r.content)
+        st.success("✅ تم تحميل النموذج!")
+        
 # تحميل نموذج الـ CNN
-model = tf.keras.models.load_model("cnn_congestion_model.h5")
+model = tf.keras.models.load_model(model_path)
+
+
 class_names = ['خفيف', 'متوسط', 'عالي']
 
 st.title("📸 تحليل مستوى الازدحام في الصورة")
