@@ -11,7 +11,7 @@ import os
 model_path = "cnn_congestion_model.h5"
 if not os.path.exists(model_path):
     with st.spinner("📥 جاري تحميل النموذج من Google Drive..."):
-        url = "https://drive.google.com/uc?id=1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_"
+        url = "https://drive.google.com/file/d/1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_"
         gdown.download(url, model_path, quiet=False)
         st.success("✅ تم تحميل النموذج!")
 
