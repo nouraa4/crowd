@@ -11,7 +11,7 @@ import requests
 model_path = "cnn_congestion_model.h5"
 if not os.path.exists(model_path):
     with st.spinner("📥 جاري تحميل النموذج..."):
-        url = "https://drive.google.com/file/d/1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_/view?usp=sharing"
+        url = "https://drive.google.com/uc?id=1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_"
         r = requests.get(url, allow_redirects=True)
         open(model_path, 'wb').write(r.content)
         st.success("✅ تم تحميل النموذج!")
