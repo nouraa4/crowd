@@ -4,18 +4,18 @@ import tensorflow as tf
 from PIL import Image
 import folium
 from streamlit_folium import st_folium
-from huggingface_hub import hf_hub_download
+import gdown
+import os
 
-# تحميل النموذج من Hugging Face
-with st.spinner("📥 جاري تحميل النموذج..."):
-    model_path = hf_hub_download(
-        repo_id="noura-ai/cnn_congestion_model",  # اسم الريبو الصحيح على Hugging Face
-        filename="cnn_congestion_model.h5",
-        repo_type="model"
-    )
-    st.success("✅ تم تحميل النموذج!")
+# التأكد من تحميل النموذج من Google Drive
+model_path = "cnn_congestion_model.h5"
+if not os.path.exists(model_path):
+    with st.spinner("📥 جاري تحميل النموذج من Google Drive..."):
+        url = "https://drive.google.com/uc?id=1rczlSO7402EvyQnD_O-lNe6nQlE_YCA_"
+        gdown.download(url, model_path, quiet=False)
+        st.success("✅ تم تحميل النموذج!")
 
-# تحميل نموذج CNN
+# تحميل النموذج
 model = tf.keras.models.load_model(model_path)
 class_names = ['خفيف', 'متوسط', 'عالي']
 
