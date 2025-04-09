@@ -4,4 +4,4 @@ tensorflow
 pillow
 folium
 numpy
-gdown
+requests
