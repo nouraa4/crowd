@@ -4,4 +4,4 @@ tensorflow
 pillow
 folium
 numpy
-huggingface_hub
+gdown
