@@ -4,17 +4,16 @@ import tensorflow as tf
 from PIL import Image
 import folium
 from streamlit_folium import st_folium
-import os
-import requests
+from huggingface_hub import hf_hub_download
 
-# تحميل النموذج من Hugging Face إذا غير موجود
-model_path = "cnn_congestion_model.h5"
-if not os.path.exists(model_path):
-    with st.spinner("📥 جاري تحميل النموذج..."):
-        url = "https://huggingface.co/noura-ai/models/resolve/main/cnn_congestion_model.h5"
-        r = requests.get(url, allow_redirects=True)
-        open(model_path, 'wb').write(r.content)
-        st.success("✅ تم تحميل النموذج!")
+# تحميل النموذج من Hugging Face
+with st.spinner("📥 جاري تحميل النموذج..."):
+    model_path = hf_hub_download(
+        repo_id="noura-ai/models",
+        filename="cnn_congestion_model.h5",
+        repo_type="model"
+    )
+    st.success("✅ تم تحميل النموذج!")
 
 # تحميل النموذج
 model = tf.keras.models.load_model(model_path)
